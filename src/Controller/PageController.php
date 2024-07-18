@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -33,6 +34,21 @@ class PageController extends AbstractController
         }
 
         return $this->render('page/contact-v1.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/contactos-v2', methods:['GET', 'POST'])]
+    public function contactV2(Request $request): Response
+    {
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            dd($form->getData(), $request);
+        }
+
+        return $this->render('page/contact-v2.html.twig', [
             'form' => $form->createView(),
         ]);
     }
