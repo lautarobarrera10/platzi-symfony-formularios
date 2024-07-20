@@ -13,6 +13,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class PageController extends AbstractController
 {
+    #[Route('/', name: 'index', methods:['GET'])]
+    public function index(): Response
+    {
+        return $this->render('page/index.html.twig');
+    }
+
+
     #[Route('/contactos-v1', name: 'contact-v1', methods:['GET', 'POST'])]
     public function contactV1(Request $request): Response
     {
